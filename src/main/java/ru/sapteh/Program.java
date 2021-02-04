@@ -13,10 +13,10 @@ public class Program extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("ru/sapteh/model/clients.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("ru/sapteh/model/select.fxml")));
         primaryStage.setScene(new Scene(root));
-        primaryStage.setTitle("Бд");
         primaryStage.setResizable(false);
+        primaryStage.setTitle("Выберите сколько нужно отображать пользователей");
         primaryStage.show();
     }
 

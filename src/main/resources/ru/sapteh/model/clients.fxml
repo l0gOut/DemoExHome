@@ -3,14 +3,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="ru.sapteh.controller.ControllerClients">
-    <TableView layoutX="181.0" layoutY="64.0" prefHeight="200.0" prefWidth="200.0">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.sapteh.controller.ControllerClients">
+    <TableView fx:id="tableViewClint" prefHeight="540.0" prefWidth="960.0">
       <columns>
-          <TableColumn prefWidth="75.0" text="C1"/>
-          <TableColumn prefWidth="75.0" text="C2"/>
+          <TableColumn fx:id="columnId" prefWidth="34.0" text="id" />
+          <TableColumn fx:id="cikunbGender" prefWidth="29.0" text="Gender" />
+         <TableColumn fx:id="columnFirstName" prefWidth="88.0" text="FirstName" />
+         <TableColumn fx:id="columnLastName" prefWidth="149.0" text="LastName" />
+         <TableColumn fx:id="patronymic" prefWidth="75.0" text="Patronymic" />
+         <TableColumn fx:id="columnBirthday" prefWidth="75.0" text="Birthday" />
+         <TableColumn fx:id="columnPhoneNum" prefWidth="97.0" text="PhoneNumber" />
+         <TableColumn fx:id="columnEmail" prefWidth="103.0" text="Email" />
+         <TableColumn fx:id="columnRegDate" prefWidth="72.0" text="RegistrationDate" />
+         <TableColumn fx:id="columnDateLastLog" prefWidth="75.0" text="DateLastLog" />
+         <TableColumn fx:id="columnValueLog" prefWidth="54.0" text="ValueLog" />
+         <TableColumn fx:id="columnTags" prefWidth="108.0" text="Tags" />
       </columns>
     </TableView>
 </Pane>
