@@ -11,7 +11,7 @@
       <RadioButton fx:id="twoHundred" layoutX="15.0" layoutY="120.0" mnemonicParsing="false" text="200 пользователей." />
       <RadioButton fx:id="all" layoutX="180.0" layoutY="120.0" mnemonicParsing="false" text="Все пользователи." />
       <Text layoutX="39.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите сколько пользователей нужно отобразить." wrappingWidth="244.134765625" />
-      <Button layoutX="180.0" layoutY="165.0" mnemonicParsing="false" onAction="#button" text="Перейти в спиок." />
+      <Button layoutX="180.0" layoutY="165.0" mnemonicParsing="false" onAction="#button" text="Перейти в список" />
       <Label fx:id="label" layoutX="14.0" layoutY="169.0" textFill="#a80000" />
    </children>
 </Pane>
