@@ -1,3 +1,16 @@
-.button {
-    -fx-border-style: 20px;
+#Pane{
+    -fx-background-color: #666;
+}
+#Button{
+    -fx-background-color: #ff8d00;
+}
+#Button:hover{
+    -fx-background-color: #ffb559;
+}
+#RButton{
+    -fx-color: #ff8d00;
+    -fx-border-color: #545454;
+}
+#RButton:hover{
+    -fx-color: #ffb559;
 }
