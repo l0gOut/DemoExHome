@@ -9,7 +9,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="client")
@@ -36,8 +35,11 @@ public class Client {
     private Date registrationDate;
     @Column(name = "PhotoPath")
     private String photoPath;
-    @OneToMany(mappedBy = "client")
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<ClientService> clientService;
+    @ManyToMany(mappedBy = "clients", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Tag> tags;
 
 
     @Override

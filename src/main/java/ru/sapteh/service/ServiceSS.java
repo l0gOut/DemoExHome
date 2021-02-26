@@ -53,7 +53,7 @@ public class ServiceSS implements DAO<Service, Integer> {
     @Override
     public List<Service> readAll() {
         try(Session session = factory.openSession()){
-            return session.createQuery("FROM Client").list();
+            return session.createQuery("FROM Service").list();
         }
     }
 }

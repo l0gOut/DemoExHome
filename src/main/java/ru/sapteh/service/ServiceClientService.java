@@ -52,7 +52,7 @@ public class ServiceClientService implements DAO<ClientService, Integer> {
     @Override
     public List<ClientService> readAll() {
         try(Session session = factory.openSession()){
-            return session.createQuery("FROM Client").list();
+            return session.createQuery("FROM ClientService").list();
         }
     }
 }
