@@ -19,19 +19,14 @@ public class Program extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("ru/sapteh/model/select.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("ru/sapteh/model/clients.fxml")));
         primaryStage.setScene(new Scene(root));
-        primaryStage.setResizable(false);
-        primaryStage.setTitle("Выберите сколько нужно отображать пользователей");
+//        primaryStage.setResizable(false);
+        primaryStage.setTitle("Бд");
         primaryStage.show();
     }
 
     public static void main(String[] args) {
-//        launch(args);
-        SessionFactory factory = new Configuration().configure().buildSessionFactory();
-        DAO<ClientService, Integer> clientService = new ServiceClientService(factory);
-        for (ClientService client: clientService.readAll()) {
-            System.out.println(client);
-        }
+        launch(args);
     }
 }

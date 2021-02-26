@@ -3,21 +3,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.sapteh.controller.ControllerClients">
-    <TableView fx:id="tableViewClint" prefHeight="540.0" prefWidth="960.0">
-      <columns>
-          <TableColumn fx:id="columnId" prefWidth="34.0" text="id" />
-          <TableColumn fx:id="cikunbGender" prefWidth="29.0" text="Gender" />
-         <TableColumn fx:id="columnFirstName" prefWidth="88.0" text="FirstName" />
-         <TableColumn fx:id="columnLastName" prefWidth="149.0" text="LastName" />
-         <TableColumn fx:id="patronymic" prefWidth="75.0" text="Patronymic" />
-         <TableColumn fx:id="columnBirthday" prefWidth="75.0" text="Birthday" />
-         <TableColumn fx:id="columnPhoneNum" prefWidth="97.0" text="PhoneNumber" />
-         <TableColumn fx:id="columnEmail" prefWidth="103.0" text="Email" />
-         <TableColumn fx:id="columnRegDate" prefWidth="72.0" text="RegistrationDate" />
-         <TableColumn fx:id="columnDateLastLog" prefWidth="75.0" text="DateLastLog" />
-         <TableColumn fx:id="columnValueLog" prefWidth="54.0" text="ValueLog" />
-         <TableColumn fx:id="columnTags" prefWidth="108.0" text="Tags" />
-      </columns>
-    </TableView>
-</Pane>
+<AnchorPane fx:id="columnLastRegistrationDate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.sapteh.controller.ControllerClients">
+   <children>
+      <TableView fx:id="table" layoutX="1.0" prefHeight="400.0" prefWidth="724.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="26.0" text="ID" />
+          <TableColumn fx:id="columnFirstName" prefWidth="68.0" text="First Name" />
+            <TableColumn fx:id="columnLastName" prefWidth="64.0" text="Last Name" />
+            <TableColumn fx:id="columnPatronymic" prefWidth="75.0" text="Patronymic" />
+            <TableColumn fx:id="columnBirthday" prefWidth="55.0" text="Birthday" />
+            <TableColumn fx:id="columnRegistrationDate" prefWidth="104.0" text="Registration Date" />
+            <TableColumn fx:id="columnEmail" prefWidth="35.0" text="Email" />
+            <TableColumn fx:id="columnPhone" prefWidth="44.0" text="Phone" />
+            <TableColumn fx:id="columnGender" prefWidth="49.0" text="Gender" />
+            <TableColumn fx:id="columnLastRegistrationDate" prefWidth="131.0" text="Last Registration Date" />
+            <TableColumn fx:id="columnCountDate" prefWidth="70.0" text="Count Date" />
+        </columns>
+      </TableView>
+      <Pagination fx:id="pagination" layoutX="176.0" layoutY="286.0" prefHeight="200.0" prefWidth="249.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="176.0" AnchorPane.rightAnchor="175.0" />
+      <ComboBox fx:id="comboBox" layoutX="14.0" layoutY="413.0" prefHeight="25.0" prefWidth="101.0" AnchorPane.bottomAnchor="62.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="556.0" />
+   </children>
+</AnchorPane>
