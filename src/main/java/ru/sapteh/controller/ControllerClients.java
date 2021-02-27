@@ -71,7 +71,6 @@ public class ControllerClients {
         logicInit();
     }
 
-
     private void logicInit() {
         initDateBase();
         tableInitFirstView();
