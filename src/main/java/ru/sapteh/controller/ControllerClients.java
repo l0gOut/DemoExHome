@@ -17,6 +17,7 @@ import ru.sapteh.model.Client;
 import ru.sapteh.model.ClientService;
 import ru.sapteh.model.Tag;
 import ru.sapteh.service.ServiceClient;
+import ru.sapteh.service.ServiceTag;
 
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
@@ -26,6 +27,7 @@ import java.util.Set;
 public class ControllerClients {
 
     private final ObservableList<Client> clientObservableList = FXCollections.observableArrayList();
+    private final ObservableList<Tag> tagObservableList = FXCollections.observableArrayList();
 
     @FXML
     private TableView<Client> table;
@@ -81,7 +83,9 @@ public class ControllerClients {
     private void initDateBase() {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
         DAO<Client, Integer> serviceClient = new ServiceClient(factory);
+        DAO<Tag,Integer> serviceTag = new ServiceTag(factory);
         clientObservableList.addAll(serviceClient.readAll());
+        tagObservableList.addAll(serviceTag.readAll());
         factory.close();
     }
 
@@ -183,15 +187,15 @@ public class ControllerClients {
             protected void updateItem(String item, boolean empty) {
                 if(item != null || !empty){
                     assert item != null;
-                    if(item.equalsIgnoreCase("В процессе...")) {
+                    if(item.equalsIgnoreCase(tagObservableList.get(2).getTitle())) {
                         setStyle("-fx-background-color: #FFB14D;" +
                                 "-fx-text-fill: #333;"+
                                 "-fx-border-color: #eee;");
-                    } else if (item.equalsIgnoreCase("Не выполнен.")){
+                    } else if (item.equalsIgnoreCase(tagObservableList.get(1).getTitle())){
                         setStyle("-fx-background-color: #FF9F93;" +
                                 "-fx-text-fill: #333;"+
                                 "-fx-border-color: #eee;");
-                    } else if (item.equalsIgnoreCase("Выполнен!")){
+                    } else if (item.equalsIgnoreCase(tagObservableList.get(0).getTitle())){
                         setStyle("-fx-background-color: #50FF65;" +
                                 "-fx-text-fill: #333;" +
                                 "-fx-border-color: #eee;");
