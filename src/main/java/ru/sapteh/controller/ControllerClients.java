@@ -66,8 +66,6 @@ public class ControllerClients {
     private int sizeList;
     private int comboBoxValue;
 
-
-
     @FXML
     private void initialize() {
         logicInit();
@@ -85,6 +83,7 @@ public class ControllerClients {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
         DAO<Client, Integer> serviceClient = new ServiceClient(factory);
         clientObservableList.addAll(serviceClient.readAll());
+        factory.close();
     }
 
     private void tableInitFirstView() {
@@ -117,6 +116,7 @@ public class ControllerClients {
         });
         initCellsColor();
         table.setItems(clientObservableList);
+        table.setEditable(true);
         pagination.setPageCount(1);
     }
 
@@ -138,7 +138,7 @@ public class ControllerClients {
         pagination.setPageCount((int) (Math.ceil((double) sizeList / newValue)));
         pagination.setCurrentPageIndex(0);
         table.setItems(FXCollections.observableArrayList(clientObservableList.subList(pagination.getCurrentPageIndex(), newValue)));
-        searchInit(clientObservableList);
+        searchInit(table.getItems());
         pagination.currentPageIndexProperty().addListener((this::paginationComboBox));
     }
 
@@ -165,6 +165,7 @@ public class ControllerClients {
             @Override
             protected void updateItem(String item, boolean empty) {
                 if(item != null || !empty){
+                    assert item != null;
                     if(item.equalsIgnoreCase("Не регистрировался!")) {
                         setStyle("-fx-background-color: #FF9F93;" +
                                 "-fx-text-fill: #333;"+
@@ -182,6 +183,7 @@ public class ControllerClients {
             @Override
             protected void updateItem(String item, boolean empty) {
                 if(item != null || !empty){
+                    assert item != null;
                     if(item.equalsIgnoreCase("В процессе...")) {
                         setStyle("-fx-background-color: #FFB14D;" +
                                 "-fx-text-fill: #333;"+
