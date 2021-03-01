@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.sapteh.controller.ControllerEntrance">
+   <children>
+      <VBox alignment="CENTER" layoutX="279.0" layoutY="100.0" prefHeight="359.0" prefWidth="307.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="14.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="307.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Введите логин и пароль для входа!" wrappingWidth="192.87890625" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="307.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Логин" />
+                  <TextField fx:id="fieldLogin" onKeyPressed="#key">
+                     <HBox.margin>
+                        <Insets left="8.0" />
+                     </HBox.margin></TextField>
+                  <Label fx:id="labelLogin" minWidth="-Infinity" />
+               </children></HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="307.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Пароль" />
+                  <TextField fx:id="fieldPassword" onKeyPressed="#key" />
+                  <Label fx:id="labelPassword" minWidth="-Infinity" />
+               </children></HBox>
+            <Label fx:id="labelStatus" contentDisplay="CENTER" />
+            <HBox alignment="CENTER" prefHeight="58.0" prefWidth="307.0" spacing="100.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#join" text="Вход" />
+                  <Button mnemonicParsing="false" onAction="#createUser" text="Создание пользователя." />
+               </children></HBox>
+         </children>
+      </VBox>
+      <Separator layoutX="230.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="8.0" AnchorPane.bottomAnchor="0.0" />
+   </children>
+</AnchorPane>

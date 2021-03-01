@@ -7,8 +7,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.dom4j.CDATA;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -19,6 +24,7 @@ import ru.sapteh.model.Tag;
 import ru.sapteh.service.ServiceClient;
 import ru.sapteh.service.ServiceTag;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
@@ -65,12 +71,28 @@ public class ControllerClients {
     @FXML
     private Pagination pagination;
 
+    @FXML
+    private Button createClient;
+
     private int sizeList;
     private int comboBoxValue;
 
     @FXML
     private void initialize() {
+        if (!ControllerEntrance.active){
+            createClient.setVisible(false);
+        }
         logicInit();
+    }
+
+    @FXML
+    private void createUsers() throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/ru/sapteh/model/createUsers.fxml"));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.setTitle("Создание Пользователя");
+        stage.showAndWait();
     }
 
     private void logicInit() {
@@ -79,6 +101,7 @@ public class ControllerClients {
         comboBoxInit();
         searchInit(clientObservableList);
     }
+
 
     private void initDateBase() {
         SessionFactory factory = new Configuration().configure().buildSessionFactory();
@@ -213,24 +236,22 @@ public class ControllerClients {
 
     private void searchInit(ObservableList<Client> observableList){
         FilteredList<Client> filteredList = new FilteredList<>(observableList, client -> true);
-        txtSearch.textProperty().addListener((observableValue, name, value) -> {
-            filteredList.setPredicate(client -> {
-                if (value == null || value.isEmpty()) {
-                    initCellsColor();
-                    return true;
-                }
-                String lowerCaseFilter = value.toLowerCase();
+        txtSearch.textProperty().addListener((observableValue, name, value) -> filteredList.setPredicate(client -> {
+            if (value == null || value.isEmpty()) {
+                initCellsColor();
+                return true;
+            }
+            String lowerCaseFilter = value.toLowerCase();
 
-                if (String.valueOf(client.getFirstName()).toLowerCase().contains(lowerCaseFilter)) {
-                    initCellsColor();
-                    return true;
-                } else if (String.valueOf(client.getLastName()).toLowerCase().contains(lowerCaseFilter)) {
-                    initCellsColor();
-                    return true;
-                }
-                return false;
-            });
-        });
+            if (String.valueOf(client.getFirstName()).toLowerCase().contains(lowerCaseFilter)) {
+                initCellsColor();
+                return true;
+            } else if (String.valueOf(client.getLastName()).toLowerCase().contains(lowerCaseFilter)) {
+                initCellsColor();
+                return true;
+            }
+            return false;
+        }));
         SortedList<Client> sortedData = new SortedList<>(filteredList);
         sortedData.comparatorProperty().bind(table.comparatorProperty());
         table.setItems(sortedData);

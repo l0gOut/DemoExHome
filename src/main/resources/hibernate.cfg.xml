@@ -6,9 +6,10 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost/auto_service</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">1234</property>
-        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
 
         <mapping class="ru.sapteh.model.Client"/>
@@ -16,6 +17,8 @@
         <mapping class="ru.sapteh.model.Gender"/>
         <mapping class="ru.sapteh.model.Service"/>
         <mapping class="ru.sapteh.model.Tag"/>
+        <mapping class="ru.sapteh.model.Users"/>
+        <mapping class="ru.sapteh.model.Roles"/>
 
     </session-factory>
 </hibernate-configuration>
