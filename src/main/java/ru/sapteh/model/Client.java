@@ -10,6 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Table(name="client")
 public class Client {
@@ -18,20 +19,28 @@ public class Client {
     private int id;
     @ManyToOne
     @JoinColumn(name = "GenderCode")
+    @NonNull
     private Gender gender;
     @Column(name = "FirstName")
+    @NonNull
     private String firstName;
     @Column(name = "LastName")
+    @NonNull
     private String lastName;
     @Column(name = "Patronymic")
+    @NonNull
     private String patronymic;
     @Column(name = "Birthday")
+    @NonNull
     private Date birthday;
     @Column(name = "Phone")
+    @NonNull
     private String phoneNumber;
     @Column(name = "Email")
+    @NonNull
     private String email;
     @Column(name = "RegistrationDate")
+    @NonNull
     private Date registrationDate;
     @Column(name = "PhotoPath")
     private String photoPath;

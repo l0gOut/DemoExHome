@@ -11,10 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.dom4j.CDATA;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.sapteh.dao.DAO;
@@ -72,7 +70,9 @@ public class ControllerClients {
     private Pagination pagination;
 
     @FXML
-    private Button createClient;
+    private Button visibleButtonUsers;
+    @FXML
+    private Button visibleButtonClient;
 
     private int sizeList;
     private int comboBoxValue;
@@ -80,7 +80,8 @@ public class ControllerClients {
     @FXML
     private void initialize() {
         if (!ControllerEntrance.active){
-            createClient.setVisible(false);
+            visibleButtonUsers.setVisible(false);
+            visibleButtonClient.setVisible(false);
         }
         logicInit();
     }
@@ -92,6 +93,15 @@ public class ControllerClients {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(new Scene(root));
         stage.setTitle("Создание Пользователя");
+        stage.showAndWait();
+    }
+    @FXML
+    private void createClient() throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/ru/sapteh/model/createClients.fxml"));
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(root));
+        stage.setTitle("Создание Клиента");
         stage.showAndWait();
     }
 
@@ -247,6 +257,9 @@ public class ControllerClients {
                 initCellsColor();
                 return true;
             } else if (String.valueOf(client.getLastName()).toLowerCase().contains(lowerCaseFilter)) {
+                initCellsColor();
+                return true;
+            } else if (String.valueOf(client.getPatronymic()).toLowerCase().contains(lowerCaseFilter)){
                 initCellsColor();
                 return true;
             }

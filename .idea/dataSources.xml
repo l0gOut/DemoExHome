@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="auto_service@localhost" uuid="77e4f6eb-48f8-4d64-9357-5c29912f508d">
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="c9b0f51e-2826-4a5a-a556-32f69fd3ecc0">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+C:/Users/Администратор/IdeaProjects/DemoExHome/src/main/resources/hibernate.cfg.xml</remarks>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/auto_service</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost/auto_service</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <driver-properties>
         <property name="serverTimezone" value="UTC" />

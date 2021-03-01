@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.sapteh.controller.ControllerCreateClient">
+   <children>
+      <TextField fx:id="fieldFirstName" layoutX="226.0" layoutY="43.0" />
+      <TextField fx:id="fieldLastName" layoutX="226.0" layoutY="85.0" />
+      <TextField fx:id="fieldPatronymic" layoutX="226.0" layoutY="125.0" />
+      <Text layoutX="194.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Имя" />
+      <Text layoutX="170.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Фамилия" />
+      <Text layoutX="168.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Отчество" />
+      <DatePicker fx:id="birthday" layoutX="226.0" layoutY="247.0" prefHeight="25.0" prefWidth="149.0" />
+      <Text layoutX="135.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="День рождения" />
+      <TextField fx:id="fieldEmail" layoutX="226.0" layoutY="164.0" />
+      <Text layoutX="178.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Почта" />
+      <TextField fx:id="fieldPhone" layoutX="226.0" layoutY="209.0" />
+      <Text layoutX="124.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Номер телефона" />
+      <ComboBox fx:id="comboBoxGender" layoutX="226.0" layoutY="288.0" prefWidth="150.0" />
+      <Text layoutX="195.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Пол" />
+      <Button layoutX="375.0" layoutY="344.0" mnemonicParsing="false" onAction="#exit" text="Выйти" />
+      <Button layoutX="180.0" layoutY="344.0" mnemonicParsing="false" onAction="#create" text="Создать" />
+      <Label fx:id="status" layoutX="286.0" layoutY="320.0" />
+   </children>
+</AnchorPane>

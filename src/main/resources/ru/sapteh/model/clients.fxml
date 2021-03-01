@@ -25,5 +25,6 @@
       <ComboBox fx:id="comboBox" layoutX="14.0" layoutY="457.0" prefHeight="25.0" prefWidth="101.0" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="14.0" />
       <TextField fx:id="txtSearch" layoutX="334.0" layoutY="10.0" AnchorPane.leftAnchor="334.0" AnchorPane.rightAnchor="331.0" AnchorPane.topAnchor="10.0" />
       <Button fx:id="visibleButtonUsers" layoutX="127.0" layoutY="457.0" mnemonicParsing="false" onAction="#createUsers" text="Создание пользователя" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="127.0" />
+      <Button fx:id="visibleButtonClient" layoutX="546.0" layoutY="458.0" mnemonicParsing="false" onAction="#createClient" text="Добавление клиента" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="137.0" />
    </children>
 </AnchorPane>

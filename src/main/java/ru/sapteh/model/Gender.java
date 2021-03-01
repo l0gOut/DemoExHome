@@ -22,9 +22,6 @@ public class Gender {
 
     @Override
     public String toString() {
-        return "Gender{" +
-                "Code=" + code +
-                ", Name='" + name + '\'' +
-                '}';
+        return getName();
     }
 }
