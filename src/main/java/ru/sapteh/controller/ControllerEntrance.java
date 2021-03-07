@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -12,7 +11,6 @@ import javafx.stage.Stage;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.sapteh.dao.DAO;
-import ru.sapteh.model.Roles;
 import ru.sapteh.model.Users;
 import ru.sapteh.service.ServiceUsers;
 
@@ -41,7 +39,7 @@ public class ControllerEntrance {
     @FXML
     private Label labelStatus;
 
-    public static boolean active = false;
+    public static boolean active;
 
     @FXML
     private void initialize(){
@@ -61,9 +59,7 @@ public class ControllerEntrance {
             } else if(password.isEmpty()){
                 labelPassword.setText("Поле пусто");
             } else if (listUsers.get(login).equals(password)) {
-                if (listRole.get(login).equals("admin")) {
-                    active = true;
-                }
+                active = listRole.get(login).equals("admin");
                 Stage stage = new Stage();
                 Parent root = FXMLLoader.load(getClass().getResource("/ru/sapteh/model/clients.fxml"));
                 stage.setScene(new Scene(root));

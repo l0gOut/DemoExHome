@@ -1,5 +1,11 @@
 package ru.sapteh.controller;
 
+import com.itextpdf.text.Font;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,8 +17,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbookType;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import ru.sapteh.dao.DAO;
@@ -22,6 +34,8 @@ import ru.sapteh.model.Tag;
 import ru.sapteh.service.ServiceClient;
 import ru.sapteh.service.ServiceTag;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
@@ -103,6 +117,125 @@ public class ControllerClients {
         stage.setScene(new Scene(root));
         stage.setTitle("Создание Клиента");
         stage.showAndWait();
+    }
+
+    @FXML
+    private void saveToPDF() throws Exception {
+        String fileName = "test.pdf";
+        Document document = new Document(PageSize.A4.rotate());  //landscape orientation
+        PdfWriter.getInstance(document, new FileOutputStream(fileName));
+
+        document.open();
+
+        //add image in pdf
+        Image image = Image.getInstance("C:\\Users\\Администратор\\IdeaProjects\\DemoExHome\\Предварительный демоэкзамен\\Screenshot_1.png");
+        image.scaleAbsoluteHeight(100);
+        image.setAlignment(Element.ALIGN_CENTER);
+        document.add(image);
+
+        //add paragraph
+        String FONT = "./src/main/resources/font/arial.ttf";
+
+        BaseFont bf = BaseFont.createFont(FONT, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        Font font = new Font(bf,10,Font.NORMAL);
+
+        Paragraph paragraph = new Paragraph("Клиенты автосервиса", new Font(bf, 30, Font.NORMAL));
+        paragraph.setSpacingAfter(20);
+        paragraph.setAlignment(Element.ALIGN_CENTER);
+        document.add(paragraph);
+
+        //--------------------------table--------------------------------
+        //получить количество столбцов
+        int numColumns = table.getColumns().size();
+        PdfPTable tables = new PdfPTable(numColumns);
+        //получить имена столбцов
+        ObservableList<TableColumn<Client, ?>> columns = table.getColumns();
+
+        for(TableColumn<Client, ?> column : columns){
+            tables.addCell(new PdfPCell(new Phrase(column.getText(), new Font(bf, 14, Font.NORMAL))));
+        }
+        tables.setHeaderRows(1);
+
+        //test
+        for (Client client: clientObservableList) {
+            tables.addCell(new PdfPCell(new Phrase(String.valueOf(client.getId()), font)));
+            tables.addCell(new PdfPCell(new Phrase(client.getFirstName(), font)));
+            tables.addCell(new PdfPCell(new Phrase(client.getLastName(), font)));
+            tables.addCell(new PdfPCell(new Phrase(client.getPatronymic(), font)));
+            tables.addCell(new PdfPCell(new Phrase(String.valueOf(client.getBirthday()), font)));
+            tables.addCell(new PdfPCell(new Phrase(String.valueOf(client.getRegistrationDate()), font)));
+            tables.addCell(new PdfPCell(new Phrase(client.getEmail(), font)));
+            tables.addCell(new PdfPCell(new Phrase(client.getPhoneNumber(), font)));
+            tables.addCell(new PdfPCell(new Phrase(client.getGender().getName(), font)));
+            tables.addCell(new PdfPCell(new Phrase("1", font)));
+            tables.addCell(new PdfPCell(new Phrase(String.valueOf(client.getClientService().size()), font)));
+            tables.addCell(new PdfPCell(new Phrase("Без тега")));
+        }
+        document.add(tables);
+
+        document.close();
+        System.out.println("finished");
+    }
+
+    @FXML
+    private void saveToExcel() throws Exception {
+        FileChooser fileChooser=new FileChooser();
+        fileChooser.setTitle("Выберите путь");
+        File file=fileChooser.showSaveDialog(new Stage());
+        String fileName= file.getAbsolutePath();
+        XSSFWorkbook workbook = new XSSFWorkbook(XSSFWorkbookType.XLSX);
+
+        Sheet sheet = workbook.createSheet("Client");
+        Row header = sheet.createRow(0);
+
+        CellStyle headerStyle = workbook.createCellStyle();
+        headerStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        XSSFFont font = workbook.createFont();
+        font.setFontHeightInPoints((short)14);
+        headerStyle.setFont(font);
+        //Header cell
+        ObservableList<TableColumn<Client, ?>> columns = table.getColumns();
+        int count = 0;
+        for(TableColumn<Client, ?> column : columns){
+            Cell headerCell = header.createCell(count++);
+            headerCell.setCellValue(column.getText());
+            headerCell.setCellStyle(headerStyle);
+        }
+
+        //Next cell (tableViewClient.getItems())
+        for (int i = 0; i < table.getItems().size(); i++) {
+            Row row = sheet.createRow(i + 1);
+            Cell id = row.createCell(0);
+            Cell gender = row.createCell(8);
+            Cell lastName = row.createCell(2);
+            Cell firstName = row.createCell(1);
+            Cell patronymic = row.createCell(3);
+            Cell birthday = row.createCell(4);
+            Cell phone = row.createCell(7);
+            Cell email = row.createCell(6);
+            Cell dateRegistration = row.createCell(5);
+            Cell lastDateVisit = row.createCell(9);
+            Cell quantityVisit = row.createCell(10);
+            id.setCellValue(table.getItems().get(i).getId());
+            gender.setCellValue(String.valueOf(table.getItems().get(i).getGender().getCode()));
+            firstName.setCellValue(table.getItems().get(i).getFirstName());
+            lastName.setCellValue(table.getItems().get(i).getLastName());
+            patronymic.setCellValue(table.getItems().get(i).getPatronymic());
+            birthday.setCellValue(table.getItems().get(i).getBirthday().toString());
+            dateRegistration.setCellValue(table.getItems().get(i).getRegistrationDate().toString());
+            email.setCellValue(table.getItems().get(i).getEmail());
+            phone.setCellValue(table.getItems().get(i).getPhoneNumber());
+            quantityVisit.setCellValue(table.getItems().get(i).getClientService().size());
+            Set<ClientService> services = table.getItems().get(i).getClientService();
+            if (services.size() != 0) {
+                lastDateVisit.setCellValue(services.stream().max(Comparator.comparing(ClientService::getStartTime)).get().getStartTime().toString());
+            }
+        }
+        workbook.write(new FileOutputStream(fileName));
+        workbook.close();
+        System.out.println("finished");
     }
 
     private void logicInit() {
